@@ -1,0 +1,59 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+}
+
+.logo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 18px;
+  font-weight: 600;
+
+  &-icon svg {
+    width: 35px;
+    height: 35px;
+  }
+
+  &:hover {
+    color: #74c3d3;
+    transition: 0.3s;
+  }
+}
+
+.menu {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  & li:hover {
+    color: #74c3d3;
+    text-decoration: underline;
+    transition: 0.3s;
+  }
+}
+
+.button {
+  padding: 10px 15px;
+
+  border-radius: 10px;
+  background-color: #b5dae1;
+  font-weight: 700;
+  white-space: nowrap;
+  &:hover {
+    background-color: #74c3d3;
+    transition: 0.3s;
+  }
+
+  &__login {
+    width: 60px;
+  }
+}
