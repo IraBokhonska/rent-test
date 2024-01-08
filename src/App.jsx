@@ -1,7 +1,9 @@
 import { Map } from "./components/Map";
 import { useJsApiLoader } from "@react-google-maps/api";
+
 import { Header } from "./components/Header/Header";
 import { ApartmentRent } from "./components/Apartments/ApartmentRent";
+import { Form } from "./components/Form/Form";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -25,6 +27,7 @@ function App() {
         {isLoaded ? <Map center={defaultCenter} /> : <h2>Loading...</h2>}
         <ApartmentRent />
       </div>
+      <Form />
     </div>
   );
 }
