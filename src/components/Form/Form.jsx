@@ -1,9 +1,18 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import "../../styles/form.scss";
+import Select from "react-select";
+
+const options = [
+  { value: "oneroom", label: "однокімнатна" },
+  { value: "stworoom", label: "двокімнатна" },
+  { value: "threerooms", label: "трикімнатна" },
+  { value: "fourrooms", label: "чотирикімнатна" },
+];
 
 export const Form = () => {
   const {
+    control,
     register,
     handleSubmit,
     reset,
@@ -13,6 +22,17 @@ export const Form = () => {
   const onSubmit = (data) => {
     alert(JSON.stringify(data));
     reset();
+  };
+
+  const customTheme = (theme) => {
+    return {
+      ...theme,
+      colors: {
+        ...theme.colors,
+        primary25: "silver",
+        primary: "silver",
+      },
+    };
   };
 
   return (
@@ -47,6 +67,10 @@ export const Form = () => {
         <input
           {...register("squareАrea", {
             required: "Поле має бути обов'язково заповнене!",
+            min: {
+              value: 1,
+              message: "Вкажіть коректне значення!",
+            },
           })}
           placeholder="Вкажіть площу квартири, будинку"
           className="form__item"
@@ -60,22 +84,18 @@ export const Form = () => {
         <input
           {...register("price", {
             required: "Поле має бути обов'язково заповнене!",
+            min: {
+              value: 1,
+              message: "Вкажіть коректне значення!",
+            },
           })}
           placeholder="Вкажіть ціну в гривнях"
           className="form__item"
           type="number"
         />
         <div className="form__error">
-          {errors?.squareАrea && (
-            <p>{errors?.squareАrea?.message || "Помилка!"}</p>
-          )}
+          {errors?.price && <p>{errors?.price?.message || "Помилка!"}</p>}
         </div>
-        <select className="form__item form__select" {...register("rooms")}>
-          <option value="oneroom">однокімнатна</option>
-          <option value="tworoom">двокімнатна</option>
-          <option value="threerooms">трикімнатна</option>
-          <option value="fourrooms">чотирикімнатна</option>
-        </select>
         <textarea
           {...register("text", {
             maxLength: {
@@ -89,6 +109,19 @@ export const Form = () => {
         <div className="form__error">
           {errors?.text && <p>{errors?.text?.message || "Помилка!"}</p>}
         </div>
+        <Controller
+          name="rooms"
+          control={control}
+          render={({ field }) => (
+            <Select
+              {...field}
+              options={options}
+              theme={customTheme}
+              placeholder={"Вкажіть кількість кімнат"}
+              isSearchable
+            />
+          )}
+        />
         <div>
           <input
             type="file"
